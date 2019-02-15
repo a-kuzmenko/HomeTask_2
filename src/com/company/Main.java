@@ -11,14 +11,29 @@ public class Main {
         System.out.print("Enter number from 2 to 10: ");
         int size = scanner.nextInt();
         int scanNumber [] = new int[size];
-
+        int numbers[] = new int[size];
 
         GetArray(scanner, size, scanNumber);
-        System.out.println("Ввести n чисел с консоли");
         ShowArray(scanNumber);
 
         //1. Найти самое короткое и самое длинное число. Вывести найденные числа и их длину.
+        GetLengthEachNumber(scanNumber, numbers);
+        ShowLength(numbers);
+        int min = numbers[0];
+        int max = numbers[0];
+        int big = 0, small = 0;
+        for (int i = 0; i < scanNumber.length; i++) {
+            min = Math.min(min,numbers[i]);
+            max = Math.max(max,numbers[i]);
+            if(min > numbers[i]) {
+                small = scanNumber[i];
+            }else if(min < i) {
+                big = scanNumber[i];
+            }
 
+        }
+        System.out.println("The smallest number - " + scanNumber[small] + "the length is - " + min);
+        System.out.println("The biggest number - " + scanNumber[big] + "the length is - " + max);
         //2. Упорядочить и вывести числа в порядке возрастания (убывания) значений их длины.
         System.out.println("Упорядочить и вывести числа в порядке возрастания");
         SortAscending(scanNumber);
@@ -69,6 +84,16 @@ public class Main {
 
     }
 
+    private static void ShowLength(int[] numbers) {
+        System.out.println(Arrays.toString(numbers));
+    }
+
+    private static void GetLengthEachNumber(int[] scanNumber, int[] numbers) {
+        for (int i = 0; i < scanNumber.length; i++) {
+            numbers[i] = (scanNumber[i] + "").length();
+
+        }
+    }
 
 
     private static void GetMatrix(Scanner scanner, int lines, int[][] scanMatrix) {
@@ -100,6 +125,7 @@ public class Main {
         System.out.print("Enter " + size + " integer(s): ");
         for(int i = 0; i < scanNumber.length; i++){
             scanNumber[i] = scanner.nextInt();
+
         }
     }
 
@@ -121,5 +147,7 @@ public class Main {
 
     private static void ShowArray(int[] scanNumber) {
         System.out.println(Arrays.toString(scanNumber));
+
     }
+
 }
