@@ -19,21 +19,8 @@ public class Main {
         //1. Найти самое короткое и самое длинное число. Вывести найденные числа и их длину.
         GetLengthEachNumber(scanNumber, numbers);
         ShowLength(numbers);
-        int min = numbers[0];
-        int max = numbers[0];
-        int big = 0, small = 0;
-        for (int i = 0; i < scanNumber.length; i++) {
-            min = Math.min(min,numbers[i]);
-            max = Math.max(max,numbers[i]);
-            if(min > numbers[i]) {
-                small = scanNumber[i];
-            }else if(min < i) {
-                big = scanNumber[i];
-            }
+        SMallBigNumber(size, scanNumber, numbers);
 
-        }
-        System.out.println("The smallest number - " + scanNumber[small] + "the length is - " + min);
-        System.out.println("The biggest number - " + scanNumber[big] + "the length is - " + max);
         //2. Упорядочить и вывести числа в порядке возрастания (убывания) значений их длины.
         System.out.println("Упорядочить и вывести числа в порядке возрастания");
         SortAscending(scanNumber);
@@ -45,6 +32,27 @@ public class Main {
         ShowArray(scanNumber);
 
         //3. Вывести на консоль те числа, длина которых меньше (больше) средней, а также длину.
+        float value = 0;
+        for (int i = 0; i < size; i++) {
+            value = value + numbers[i];
+        }
+        value = value / size;
+        System.out.println();
+        System.out.print("Числа, длина которых меньше средней: ");
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            if (value > numbers[i]) {
+                System.out.println("Число: " + scanNumber[i] + "." + " Его длина: " + numbers[i] + ";");
+                System.out.println();
+            }
+        }
+        System.out.print("Числа, длина которых больше средней: ");
+        System.out.println();
+        for (int i = 0; i < size; i++) {
+            if (value < numbers[i]) {
+                System.out.println("Число: " + scanNumber[i] + "." + " Его длина: " + numbers[i] + ";");
+            }
+        }
         //4. Найти число, в котором число различных цифр минимально. Если таких чисел несколько, найти
         //первое из них.
         //5. Найти количество чисел, содержащих только четные цифры, а среди них количество чисел с
@@ -58,9 +66,19 @@ public class Main {
         System.out.print("Enter the number of lines from 2 to 10: ");
         int lines = scanner.nextInt();
 
-        int scanMatrix [][] = new int[lines][lines];
+        int[][] workArray = new int[lines][lines];
+        int a = 0;
 
-        GetMatrix(scanner, lines, scanMatrix);
+        for (int i = 0; i < lines; i++)
+        {
+            for (int j = 0; j < lines; j++) {
+                a++;
+                workArray[i][j] = a;
+                System.out.print(workArray[i][j] + " ");
+            }
+            System.out.println();
+
+        }
 
         //System.out.println(Arrays.toString(scanMatrix));
         //9.Ввести с консоли n-размерность матрицы a [n] [n]. Задать значения элемен-
@@ -82,6 +100,31 @@ public class Main {
 
 
 
+    }
+
+    private static void SMallBigNumber(int size, int[] scanNumber, int[] numbers) {
+        int min = numbers[0];
+        int max = numbers[0];
+        int big = 0, small = 0, number_lenght = 0;
+        for (int i = 0; i < size; i++) {
+            //min = Math.min(min,numbers[i]);
+           // max = Math.max(max,numbers[i]);
+
+            number_lenght = numbers[i];
+            if (min > number_lenght) {
+                min = number_lenght;
+                small = i;
+            } else {
+                if (max < number_lenght) {
+                    max = number_lenght;
+                    big = i;
+                }
+            }
+
+        }
+
+        System.out.println("The smallest number - " + scanNumber[small] + " the length is - " + min);
+        System.out.println("The biggest number - " + scanNumber[big] + " the length is - " + max);
     }
 
     private static void ShowLength(int[] numbers) {
